@@ -5,7 +5,13 @@ def handle_client_connection(client_socket, addr):
     print(f"Got a connection from {addr}")
     
     message = client_socket.recv(1024)
-    print(f"Received from client: {message.decode()}")
+    print(f"Received encrypted message: {message.decode()}")
+
+    rkb_rev = DES.rkb[::-1]
+    rk_rev = DES.rk[::-1]
+    decrypted_message = DES.decrypt(message.decode(), rkb_rev, rk_rev)
+
+    print(f"Decrypted message: {decrypted_message}")
     
     client_socket.close()
 
