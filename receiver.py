@@ -9,7 +9,7 @@ def handle_client_connection(client_socket, addr):
 
     rkb_rev = DES.rkb[::-1]
     rk_rev = DES.rk[::-1]
-    decrypted_message = DES.decrypt(message.decode(), rkb_rev, rk_rev)
+    decrypted_message = DES.encrypt(message.decode(), rkb_rev, rk_rev)
 
     print(f"Decrypted message: {decrypted_message}")
     
