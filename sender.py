@@ -18,11 +18,12 @@ def client_program():
 
         rkb = DES.rkb
         rk = DES.rk
-        padded_message = message + (8 - len(message) % 8) * ' '  # Pad message to be multiple of 8
-        encrypted_message = DES.encrypt(DES.strToHex(padded_message), rkb, rk)
+        # padded_message = message + (8 - len(message) % 8) * ' '  # Pad message to be multiple of 8
+        encrypted_message = DES.encrypt(DES.strToHex(message), rkb, rk)
+        encrypted_hex = DES.binToHex(encrypted_message)
 
-        print(f"Sending encrypted message: {DES.binToStr(encrypted_message)}")
-        client_socket.send(encrypted_message.encode())
+        print(f"Sending encrypted message: {encrypted_hex}")
+        client_socket.sendall(encrypted_hex.encode("ascii"))
 
     client_socket.close()
 
