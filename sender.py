@@ -21,6 +21,7 @@ def client_program():
         padded_message = message + (8 - len(message) % 8) * ' '  # Pad message to be multiple of 8
         encrypted_message = DES.encrypt(DES.strToHex(padded_message), rkb, rk)
 
+        print(f"Sending encrypted message: {encrypted_message}")
         client_socket.send(encrypted_message.encode())
 
     client_socket.close()
